@@ -1,0 +1,292 @@
+[
+  {
+    "Name": "CB3 MKII",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 14.0,
+    "PixelWidth": 160,
+    "PixelHeight": 320,
+    "TotalPixels": 51200,
+    "PowerDraw": 600.0
+  },
+  {
+    "Name": "CB5 MKII",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 12.2,
+    "PixelWidth": 104,
+    "PixelHeight": 208,
+    "TotalPixels": 21632,
+    "PowerDraw": 480.0
+  },
+  {
+    "Name": "CB8 MKII",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 11.0,
+    "PixelWidth": 72,
+    "PixelHeight": 144,
+    "TotalPixels": 10368,
+    "PowerDraw": 530.0
+  },
+  {
+    "Name": "BLACK PEARL 2V2",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 9.35,
+    "PixelWidth": 176,
+    "PixelHeight": 176,
+    "TotalPixels": 30976,
+    "PowerDraw": 190.0
+  },
+  {
+    "Name": "Ruby 1.5",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 8.16,
+    "PixelWidth": 320,
+    "PixelHeight": 320,
+    "TotalPixels": 102400,
+    "PowerDraw": 210.0
+  },
+  {
+    "Name": "Ruby 1.5F",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 8.46,
+    "PixelWidth": 320,
+    "PixelHeight": 320,
+    "TotalPixels": 102400,
+    "PowerDraw": 250.0
+  },
+  {
+    "Name": "Ruby 1.9B V2",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 9.2,
+    "PixelWidth": 256,
+    "PixelHeight": 256,
+    "TotalPixels": 65536,
+    "PowerDraw": 160.0
+  },
+  {
+    "Name": "Ruby 2.3",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 8.16,
+    "PixelWidth": 216,
+    "PixelHeight": 216,
+    "TotalPixels": 46656,
+    "PowerDraw": 180.0
+  },
+  {
+    "Name": "Ruby-C 2.3",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 7.4,
+    "PixelWidth": 216,
+    "PixelHeight": 216,
+    "TotalPixels": 46656,
+    "PowerDraw": 180.0
+  },
+  {
+    "Name": "Graphite GP2.6",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 9.0,
+    "PixelWidth": 192,
+    "PixelHeight": 384,
+    "TotalPixels": 73728,
+    "PowerDraw": 320.0
+  },
+  {
+    "Name": "Graphite GP3.1",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 9.0,
+    "PixelWidth": 160,
+    "PixelHeight": 320,
+    "TotalPixels": 51200,
+    "PowerDraw": 320.0
+  },
+  {
+    "Name": "Graphite GP3.9",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 9.0,
+    "PixelWidth": 128,
+    "PixelHeight": 256,
+    "TotalPixels": 32768,
+    "PowerDraw": 320.0
+  },
+  {
+    "Name": "Carbon CB3",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 13.2,
+    "PixelWidth": 160,
+    "PixelHeight": 320,
+    "TotalPixels": 51200,
+    "PowerDraw": 540.0
+  },
+  {
+    "Name": "Carbon CB5",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 13.85,
+    "PixelWidth": 104,
+    "PixelHeight": 208,
+    "TotalPixels": 21632,
+    "PowerDraw": 500.0
+  },
+  {
+    "Name": "Carbon CB5 BLACK",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 13.85,
+    "PixelWidth": 104,
+    "PixelHeight": 208,
+    "TotalPixels": 21632,
+    "PowerDraw": 650.0
+  },
+  {
+    "Name": "Carbon CB8",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 12.68,
+    "PixelWidth": 72,
+    "PixelHeight": 144,
+    "TotalPixels": 10368,
+    "PowerDraw": 430.0
+  },
+  {
+    "Name": "Carbon CB8 Transparent",
+    "PhysicalWidth": 600.0,
+    "PhysicalHeight": 1200.0,
+    "Weight": 10.9,
+    "PixelWidth": 72,
+    "PixelHeight": 144,
+    "TotalPixels": 10368,
+    "PowerDraw": 430.0
+  },
+  {
+    "Name": "Black Quartz 3.9",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 17.8,
+    "PixelWidth": 128,
+    "PixelHeight": 256,
+    "TotalPixels": 32768,
+    "PowerDraw": 360.0
+  },
+  {
+    "Name": "Black Quartz 3.9 Half",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 9.8,
+    "PixelWidth": 128,
+    "PixelHeight": 128,
+    "TotalPixels": 16384,
+    "PowerDraw": 190.0
+  },
+  {
+    "Name": "Black Quartz 4.6",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 22.0,
+    "PixelWidth": 108,
+    "PixelHeight": 216,
+    "TotalPixels": 23328,
+    "PowerDraw": 370.0
+  },
+  {
+    "Name": "Black Quartz 4.6 Half",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 9.8,
+    "PixelWidth": 108,
+    "PixelHeight": 108,
+    "TotalPixels": 11664,
+    "PowerDraw": 190.0
+  },
+  {
+    "Name": "Black Quartz 6.2",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 17.8,
+    "PixelWidth": 80,
+    "PixelHeight": 160,
+    "TotalPixels": 12800,
+    "PowerDraw": 450.0
+  },
+  {
+    "Name": "Black Quartz 6.2 Half",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 9.8,
+    "PixelWidth": 80,
+    "PixelHeight": 80,
+    "TotalPixels": 6400,
+    "PowerDraw": 230.0
+  },
+  {
+    "Name": "Diamond 2.6",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 5.76,
+    "PixelWidth": 192,
+    "PixelHeight": 192,
+    "TotalPixels": 36864,
+    "PowerDraw": 180.0
+  },
+  {
+    "Name": "BLACK MARBLE BM4",
+    "PhysicalWidth": 609.6,
+    "PhysicalHeight": 609.6,
+    "Weight": 23.4,
+    "PixelWidth": 128,
+    "PixelHeight": 128,
+    "TotalPixels": 16384,
+    "PowerDraw": 290.0
+  },
+  {
+    "Name": "Black Marble BM2",
+    "PhysicalWidth": 609.6,
+    "PhysicalHeight": 609.6,
+    "Weight": 18.6,
+    "PixelWidth": 216,
+    "PixelHeight": 216,
+    "TotalPixels": 46656,
+    "PowerDraw": 310.0
+  },
+  {
+    "Name": "VANISH V8S",
+    "PhysicalWidth": 1000.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 9.4,
+    "PixelWidth": 112,
+    "PixelHeight": 112,
+    "TotalPixels": 12544,
+    "PowerDraw": 440.0
+  },
+  {
+    "Name": "VANISH V8T",
+    "PhysicalWidth": 1000.0,
+    "PhysicalHeight": 1000.0,
+    "Weight": 18.0,
+    "PixelWidth": 112,
+    "PixelHeight": 112,
+    "TotalPixels": 12544,
+    "PowerDraw": 480.0
+  },
+  {
+    "Name": "Black Pearl BP3",
+    "PhysicalWidth": 500.0,
+    "PhysicalHeight": 500.0,
+    "Weight": 8.7,
+    "PixelWidth": 128,
+    "PixelHeight": 128,
+    "TotalPixels": 16384,
+    "PowerDraw": 170.0
+  }
+]
