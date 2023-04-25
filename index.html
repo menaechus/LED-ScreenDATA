@@ -2,130 +2,30 @@
 <html>
 <head>
 	<title>ROE LED Information</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-		}
-
-		.container {
-			max-width: 600px;
-			margin: 0 auto;
-			padding: 20px;
-		}
-
-		label {
-			display: block;
-			margin-bottom: 10px;
-			font-size: 18px;
-			font-weight: bold;
-		}
-
-		select, input[type="number"] {
-			display: block;
-			margin-bottom: 20px;
-			padding: 10px;
-			font-size: 16px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			background-color: #fff;
-			width: 100%;
-			box-sizing: border-box;
-			appearance: none;
-			cursor: pointer;
-		}
-
-		select::-ms-expand {
-			display: none;
-		}
-
-		select:focus, input[type="number"]:focus {
-			outline: none;
-			border-color: #4a90e2;
-			box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
-		}
-
-		.device-info {
-			background-color: #f9f9f9;
-			padding: 20px;
-			border-radius: 5px;
-		}
-
-		.device-info p {
-			margin: 0;
-			margin-bottom: 10px;
-			font-size: 16px;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="container">
-		<label for="device-select">Select a device:</label>
-		<select id="device-select"></select>
-		<label for="screen-pieces">Enter the number of screen pieces:</label>
-		<input type="number" id="screen-pieces" min="1" max="100" value="1">
-		<div class="device-info"></div>
+	<div class="parent-container">
+		<div class="container">
+			<label for="device-select">Select a device:</label>
+			<select id="device-select"></select>
+			<label for="screen-rows">Enter the number of rows:</label>
+			<input type="number" id="screen-rows" min="1" max="100" value="1">
+			<label for="screen-cols">Enter the number of columns:</label>
+			<input type="number" id="screen-cols" min="1" max="100" value="1">
+			<button id="calculate-button">Calculate</button>
+			<div class="grid-dimensions"></div>
+			<div class="device-info"></div>
+		</div>
+		<div class="grid">
+			<div class="grid-info"> 
+				
+			</div>
+			<div class="grid-container">
+
+			</div>
+		</div>
 	</div>
-
-	<script>
-		// Load the JSON file
-		fetch('/ROE-data/ledscreens.json')
-			.then(response => response.json())
-			.then(data => {
-				const select = document.getElementById('device-select');
-				const screenPieces = document.getElementById('screen-pieces');
-
-				// Populate the dropdown menu
-				data.forEach(device => {
-					const option = document.createElement('option');
-					option.text = device.Name;
-					select.add(option);
-				});
-
-				// Update the device information when the dropdown selection changes or the number of screen pieces changes
-				function updateDeviceInfo() {
-					const deviceName = select.value;
-					const device = data.find(device => device.Name === deviceName);
-					const deviceInfoDiv = document.querySelector('.device-info');
-
-					// Clear any existing device information
-					deviceInfoDiv.innerHTML = '';
-
-					// Create a new div for the device information
-					const deviceDiv = document.createElement('div');
-					deviceDiv.classList.add('device-info');
-
-					// Calculate total pixels and total power based on the number of screen pieces
-					const totalPixels = device.PixelWidth * device.PixelHeight * screenPieces.value;
-					const totalPower = device.PowerDraw * screenPieces.value;
-
-					// Add each piece of device information as a new paragraph
-					Object.keys(device).forEach(key => {
-						if (key !== 'Name') {
-							const p = document.createElement('p');
-							if (key === 'TotalPixels') {
-								p.textContent = `${key}: ${totalPixels}`;
-							} else if (key === 'PowerDraw') {
-                p.textContent = `${key}: ${totalPower} W`;
-						} else {
-							p.textContent = `${key}: ${device[key]}`;
-						}
-						deviceDiv.appendChild(p);
-					}
-				});
-
-				// Append the device information div to the main device information div
-				deviceInfoDiv.appendChild(deviceDiv);
-			}
-
-			// Update the device information when the dropdown selection changes or the number of screen pieces changes
-			select.addEventListener('change', updateDeviceInfo);
-			screenPieces.addEventListener('input', updateDeviceInfo);
-
-			// Initialize the device information with the first device in the JSON file
-			updateDeviceInfo();
-		});
-</script>
+	<script src="script.js"></script>
 </body>
 </html>
