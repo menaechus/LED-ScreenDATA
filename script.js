@@ -74,7 +74,13 @@ fetch('ledscreens.json')
 			  for (let j = 0; j < numCols; j++) {
 				const column = document.createElement("div");
 				column.classList.add("grid-column");
-				row.appendChild(column);
+				  row.appendChild(column);
+				//make very second screen to be red and every other to be green
+				  if (j % 2 == 0) {
+					  column.style.backgroundColor = "green";
+				  } else {
+					  column.style.backgroundColor = "red";
+				  }
 			  }
 			  gridContainer.appendChild(row);
 			}
@@ -108,7 +114,6 @@ fetch('ledscreens.json')
 
 		// Update the device information when the dropdown selection changes or the number of screen pieces changes
 		select.addEventListener('change', updateDeviceInfo);
-		//screenPieces.addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-cols').addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-rows').addEventListener('input', updateDeviceInfo);
 

@@ -54,6 +54,7 @@ text-align: center;
   display: flex;
 }
 
+/*how to make grid-column change size so that it will fit the screen?*/
 .grid-column {
   background-color: #fffda4;
   width: 30px;
