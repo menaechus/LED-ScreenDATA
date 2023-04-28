@@ -14,6 +14,30 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
+.info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    align-items: center;
+	max-width: 800px;
+	margin: 0 auto;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.info2 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+    align-items: center;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
 
 .container {
     display: flex;
@@ -48,13 +72,13 @@ animation: fade-in 0.5s ease;
 text-align: center;
  display: flex;
  flex-direction: column;
+ padding: 20px;
 }
 
 .grid-row {
   display: flex;
 }
 
-/*how to make grid-column change size so that it will fit the screen?*/
 .grid-column {
   background-color: #fffda4;
   width: 30px;

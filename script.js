@@ -39,7 +39,7 @@ fetch('ledscreens.json')
                 numRows=1;
             }
 			drawGrid(numRows, numCols, device);
-			const totalPixels = (device.PixelWidth * device.PixelHeight)* (numCols * numRows);
+			const totalPixels = device.PixelWidth * device.PixelHeight;
 			const totalPower = device.PowerDraw * (numCols * numRows);
 
 			// Add each piece of device information as a new paragraph
@@ -48,8 +48,8 @@ fetch('ledscreens.json')
 					const p = document.createElement('p');
 					if (key === 'TotalPixels') {
 						p.textContent = `${key}: ${totalPixels}`;
-					} else if (key === 'PowerDraw') {
-						p.textContent = `${key}: ${totalPower} W`;
+					//} else if (key === 'PowerDraw') {
+					//	p.textContent = `${key}: ${totalPower} W`;
 					} else {
 						p.textContent = `${key}: ${device[key]}`;
 					}
@@ -74,16 +74,16 @@ fetch('ledscreens.json')
 			  for (let j = 0; j < numCols; j++) {
 				const column = document.createElement("div");
 				column.classList.add("grid-column");
-				  row.appendChild(column);
-				//make very second screen to be red and every other to be green
-				  if (j % 2 == 0) {
-					  column.style.backgroundColor = "green";
-				  } else {
-					  column.style.backgroundColor = "red";
-				  }
+				row.appendChild(column);
+				if ((i + j) % 2 == 0) {
+				  column.style.backgroundColor = "green";
+				} else {
+				  column.style.backgroundColor = "red";
+				}
 			  }
 			  gridContainer.appendChild(row);
 			}
+
 		  
 			// show grid dimensions
 			const dimensions = document.querySelector(".grid-info");
@@ -95,17 +95,28 @@ fetch('ledscreens.json')
 			// write grid dimension to the innerHTML
 			const VerticalPixels  = device.PixelHeight * numRows; //y pixel - pysty
 			const HorizontalPixels = device.PixelWidth * numCols; //x pixel - vaaka
-
+			const totalAmount = numRows * numCols;
+			
+			const TotalPixels = VerticalPixels * HorizontalPixels;
 			const totalWidth = device.PhysicalWidth * numCols;
 			const totalHeight = device.PhysicalHeight * numRows;
+			const totalWeight = device.Weight * totalAmount;
+			//const totalPower = device.PowerDraw * (numCols * numRows);
 
+			var totalWeghtF = totalWeight.toFixed(2);
 			var totalHeightF = totalHeight.toFixed(2);
 			var totalWidthF = totalWidth.toFixed(2);
+			
 
 			dimensions.innerHTML = '';
-			dimensions.innerHTML = "Resolution: " + HorizontalPixels + " x " + VerticalPixels + "<br>";
-			dimensions.innerHTML += "Physical dimensions: " + totalWidthF + " x " + totalHeightF;
+			dimensions.innerHTML = "Total amount: " + totalAmount; 
+			dimensions.innerHTML += "<br>Resolution: " + HorizontalPixels + "px * " + VerticalPixels + "px";
+			dimensions.innerHTML += "<br>Total Pixels: " + TotalPixels + "px";
+			dimensions.innerHTML += "<br>Physical dimensions: " + totalWidthF + "mm * " + totalHeightF + "mm";
+			dimensions.innerHTML += "<br>Total powerdraw: " + totalPower + "w";
 			dimensions.innerHTML += "<br>Number of phases (3000W): " + AmountOfPhasesF;
+			dimensions.innerHTML += "<br>Total weight: " + totalWeghtF + "kg";
+			dimensions.innerHTML += "<br><br>";
 		}
 		  
 
@@ -114,6 +125,7 @@ fetch('ledscreens.json')
 
 		// Update the device information when the dropdown selection changes or the number of screen pieces changes
 		select.addEventListener('change', updateDeviceInfo);
+		//screenPieces.addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-cols').addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-rows').addEventListener('input', updateDeviceInfo);
 
