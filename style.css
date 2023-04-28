@@ -22,7 +22,7 @@ body {
 	max-width: 800px;
 	margin: 0 auto;
 	border-radius: 10px;
-	background-color: #fff;
+	
 }
 
 .info2 {
@@ -34,7 +34,6 @@ body {
 	margin: 0 auto;
 	padding: 20px;
 	border-radius: 10px;
-	background-color: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
@@ -48,24 +47,22 @@ body {
 	margin: 0 auto;
 	padding: 20px;
 	border-radius: 10px;
-	background-color: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	animation: fade-in 0.5s ease;
 }
 
 .grid {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-max-width: 800px;
-margin: 0 auto;
-padding: 20px;
-border-radius: 10px;
-background-color: #fff;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-animation: fade-in 0.5s ease;
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	animation: fade-in 0.5s ease;
 }
 
 .grid-info {
@@ -80,10 +77,22 @@ text-align: center;
 }
 
 .grid-column {
-  background-color: #fffda4;
+  
   width: 30px;
   height: 30px;
   border:1px solid black;
+}
+
+.img-holder {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes fade-in {

@@ -63,12 +63,8 @@ fetch('ledscreens.json')
 
 		function drawGrid(numRows, numCols, device) {
 			const gridContainer = document.querySelector(".grid-container");
-		  
-			// clear existing grid
-			gridContainer.innerHTML = "";
-		  
-			// create rows and columns
-			for (let i = 0; i < numRows; i++) {
+			gridContainer.innerHTML = "";// clear existing grid
+			for (let i = 0; i < numRows; i++) {// create rows and columns
 			  const row = document.createElement("div");
 			  row.classList.add("grid-row");
 			  for (let j = 0; j < numCols; j++) {
@@ -83,31 +79,21 @@ fetch('ledscreens.json')
 			  }
 			  gridContainer.appendChild(row);
 			}
-
-		  
-			// show grid dimensions
-			const dimensions = document.querySelector(".grid-info");
 			
+			const dimensions = document.querySelector(".grid-info");
 			const totalPower = device.PowerDraw * (numCols * numRows);
 			const AmountOfPhases = totalPower / 3000;
 			var AmountOfPhasesF = AmountOfPhases.toFixed(1);
-
-			// write grid dimension to the innerHTML
 			const VerticalPixels  = device.PixelHeight * numRows; //y pixel - pysty
 			const HorizontalPixels = device.PixelWidth * numCols; //x pixel - vaaka
-			const totalAmount = numRows * numCols;
-			
-			const TotalPixels = VerticalPixels * HorizontalPixels;
+			const totalAmount = numRows * numCols;const TotalPixels = VerticalPixels * HorizontalPixels;
 			const totalWidth = device.PhysicalWidth * numCols;
 			const totalHeight = device.PhysicalHeight * numRows;
 			const totalWeight = device.Weight * totalAmount;
-			//const totalPower = device.PowerDraw * (numCols * numRows);
-
 			var totalWeghtF = totalWeight.toFixed(2);
 			var totalHeightF = totalHeight.toFixed(2);
 			var totalWidthF = totalWidth.toFixed(2);
 			
-
 			dimensions.innerHTML = '';
 			dimensions.innerHTML = "Total amount: " + totalAmount; 
 			dimensions.innerHTML += "<br>Resolution: " + HorizontalPixels + "px * " + VerticalPixels + "px";
@@ -117,9 +103,19 @@ fetch('ledscreens.json')
 			dimensions.innerHTML += "<br>Number of phases (3000W): " + AmountOfPhasesF;
 			dimensions.innerHTML += "<br>Total weight: " + totalWeghtF + "kg";
 			dimensions.innerHTML += "<br><br>";
+			
+			 // create PNG image of the grid
+			html2canvas(gridContainer).then(function(canvas) {
+				// convert canvas to data URL and display the image
+				const img = new Image();
+				img.src = canvas.toDataURL();
+				document.body.appendChild(img);
+			});
 		}
 		  
-
+		function saveIMG() {
+			
+		}
 
 
 
