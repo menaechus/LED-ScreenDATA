@@ -4,7 +4,7 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #f1f1f1;
+	background-color: #ffffff;
 }
 
 .parent-container {
@@ -62,7 +62,15 @@ body {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	animation: fade-in 0.5s ease;
+	/*animation: fade-in 0.5s ease;*/
+}
+
+.grid-img-holder {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	
+	align-items: center;
 }
 
 .grid-info {

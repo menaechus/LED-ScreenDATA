@@ -12,33 +12,40 @@
 		</div>
 		</div>
 	<div class="parent-container">
-	
-	
-		
 		<div class="container">
 			<label for="device-select">Select a device:</label>
 			<select id="device-select"></select>
+			<!-- add selection between stacked or hanging  not a checkbox -->
+			<form>
+				<input type="radio" id="hanging" name="hanging" value="hanging" checked="checked">
+				<label for="hanging">Hanging</label><br>
+				<input type="radio" id="stacked" name="hanging" value="stacked">
+				<label for="stacked">Stacked</label><br>
+			</form>
+			
+
 			<label for="screen-rows">Enter the number of rows:</label>
-			<input type="number" id="screen-rows" min="1" max="100" value="1">
+			<input type="number" id="screen-rows" min="1" max="25" value="1">
 			<label for="screen-cols">Enter the number of columns:</label>
-			<input type="number" id="screen-cols" min="1" max="100" value="1">
+			<input type="number" id="screen-cols" min="1" max="25" value="1">
 			<button id="calculate-button">Calculate</button>
 			<div class="grid-dimensions"></div>
 			<div class="device-info"></div>
+			<button id="save-button">Save Image</button>
 		</div>
 		<div class="grid">
-		
-			<div class="grid-info"> 
+			<div class="grid-img-holder">
+				<div class="grid-info"> 
+				</div>
+				<div class="grid-container">
+				</div>
 				
-			</div>
-			<div class="grid-container">
-
 			</div>
 		</div>
 	</div>
-	<div class="img-holder">
+	<div class="img-holder" id="img-holder">
 	</div>
-	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="html2canvas.min.js"></script>
 	<script src="script.js"></script>
 </body>
 </html>

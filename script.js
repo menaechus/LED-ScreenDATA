@@ -100,52 +100,62 @@ fetch('ledscreens.json')
 			dimensions.innerHTML += "<br>Number of phases (3000W): " + AmountOfPhasesF;
 			dimensions.innerHTML += "<br>Total weight: " + totalWeghtF + "kg";
 			dimensions.innerHTML += "<br><br>";
-			
+
+		}
+
+		function callImgGen() {	
+			const gridContainer = document.querySelector('.grid-container');
+			const deviceName = select.value;
+			const device = data.find(device => device.Name === deviceName);
 			generateImage(device, gridContainer);
 		}
-		  
+
+
+		function emptyImages() {
+			const images = document.getElementById('img-holder');
+			while (images.hasChildNodes()) {
+				images.removeChild(images.firstChild);
+			}
+		}
+		
+
 		function generateImage(device, gridContainer) {
-			const dimensions = document.querySelector('.grid-info');
-		  const totalPower = device.PowerDraw * (gridContainer.childElementCount);
-		  const AmountOfPhases = totalPower / 3000;
-		  var AmountOfPhasesF = AmountOfPhases.toFixed(1);
-		  const VerticalPixels  = device.PixelHeight * (gridContainer.childElementCount / device.Columns);
-		  const HorizontalPixels = device.PixelWidth * device.Columns;
-		  const TotalPixels = VerticalPixels * HorizontalPixels;
-		  const totalWidth = device.PhysicalWidth * device.Columns;
-		  const totalHeight = device.PhysicalHeight * (gridContainer.childElementCount / device.Columns);
-		  const totalWeight = device.Weight * (gridContainer.childElementCount);
-		  var totalWeghtF = totalWeight.toFixed(2);
-		  var totalHeightF = totalHeight.toFixed(2);
-		  var totalWidthF = totalWidth.toFixed(2);
-		  // create PNG image of the grid and add dimensions as text to image
-		  html2canvas(gridContainer).then(function(canvas) {
-			// convert canvas to data URL and display the image
-			const img = new Image();
-			var imgWidth = canvas.width;
-			var imgHeight = canvas.height;
-			var ratio = Math.max(imgWidth / HorizontalPixels, imgHeight / VerticalPixels);
-			imgWidth /= ratio;
-			imgHeight /= ratio;
-			
-			var ctx = canvas.getContext("2d");
-			ctx.font = "bold 12px Arial";
-			var x = 20;
-			var y = VerticalPixels + 20;
-			dimensions.childNodes.forEach(function(node) {
-			  ctx.fillText(node.textContent, x, y);
-			  y += 17;
+			emptyImages();
+			const grid = document.querySelector('.grid-img-holder');
+			html2canvas((grid), { width: 1920,
+				height: 1080 }).then(function(canvas) {
+				const img = new Image();
+				img.backgroundColor = "#FFFFFF";
+				img.src = canvas.toDataURL();
+				document.getElementById('img-holder').appendChild(img);
+				document.getElementById('img-holder').children[0].style.width = "90%";
 			});
-			img.src = canvas.toDataURL();
-			document.body.appendChild(img);
-		  });
+			//if we have created an image, show save button
+			document.getElementById('save-button').style.display = 'block';
+		
+		}
+
+
+		function saveImage() {
+			const images = document.getElementById('img-holder');
+			const image = images.children[0].src;
+			const link = document.createElement('a');
+			link.href = image;
+			link.download = 'image.png';
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		}
 
 		// Update the device information when the dropdown selection changes or the number of screen pieces changes
 		select.addEventListener('change', updateDeviceInfo);
-		//screenPieces.addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-cols').addEventListener('input', updateDeviceInfo);
 		document.getElementById('screen-rows').addEventListener('input', updateDeviceInfo);
+		document.getElementById('calculate-button').addEventListener('click', callImgGen);
+		document.getElementById('save-button').addEventListener('click', saveImage);
+		//hide save button
+		document.getElementById('save-button').style.display = 'none';
+
 		// Initialize the device information with the first device in the JSON file
 		updateDeviceInfo();
 	});
