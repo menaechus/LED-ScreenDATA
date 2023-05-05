@@ -131,10 +131,15 @@ fetch('ledscreens.json')
 				document.getElementById('img-holder').children[0].style.width = "90%";
 			});
 			//if we have created an image, show save button
+			document.getElementById('img-holder').style.display = 'block';
 			document.getElementById('save-button').style.display = 'block';
 		
 		}
 
+		function clearButton() {
+			document.getElementById('img-holder').style.display = 'none';
+			emptyImages();
+		}
 
 		function saveImage() {
 			const images = document.getElementById('img-holder');
@@ -153,8 +158,10 @@ fetch('ledscreens.json')
 		document.getElementById('screen-rows').addEventListener('input', updateDeviceInfo);
 		document.getElementById('calculate-button').addEventListener('click', callImgGen);
 		document.getElementById('save-button').addEventListener('click', saveImage);
+		document.getElementById('clear-button').addEventListener('click', clearButton);
 		//hide save button
 		document.getElementById('save-button').style.display = 'none';
+		document.getElementById('img-holder').style.display = 'none';
 
 		// Initialize the device information with the first device in the JSON file
 		updateDeviceInfo();
