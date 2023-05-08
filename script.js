@@ -226,6 +226,7 @@ function onLoad() {
 	document.getElementById('screen-rows').addEventListener('input', drawGrid);
 	deviceDropdown.addEventListener('change', updateDeviceInfo);
 	manufacturerDropdown.addEventListener('change', populateDeviceDropdown);	
-
+	document.getElementById('save-button').style.display = 'none';
+	document.getElementById('img-holder').style.display = 'none';
 	readManufacturers();
 }
