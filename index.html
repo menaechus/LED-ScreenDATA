@@ -3,18 +3,25 @@
 <head>
 	<title>LED Calculator</title>
 	<link rel="stylesheet" href="style.css">
+	
 </head>
 <body
 	<div class="info">
 		<div class="info2">
-		Currently includes only ROE LEDs. <br>
-		28.04.2023<br>
+		Currently includes most of ROE LEDs. <br>
+		Only Absen Polaris PL2.5 is in the list <br>
+		08.05.2023<br>
 		</div>
-		</div>
+	</div>
 	<div class="parent-container">
 		<div class="container">
+
+		<label for="manufacturer-select">Select manufacturer:</label>
+			<select id="manufacturer-select"></select>
+
 			<label for="device-select">Select a device:</label>
 			<select id="device-select"></select>
+
 			<!-- add selection between stacked or hanging  not a checkbox -->
 			<form>
 				<input type="radio" id="hanging" name="hanging" value="hanging" checked="checked">
@@ -23,12 +30,11 @@
 				<label for="stacked">Stacked (not working yet!)</label><br>
 			</form>
 			
-
 			<label for="screen-rows">Enter the number of rows:</label>
 			<input type="number" id="screen-rows" min="1" max="25" value="1">
 			<label for="screen-cols">Enter the number of columns:</label>
 			<input type="number" id="screen-cols" min="1" max="25" value="1">
-			<button id="calculate-button">Calculate</button>
+			<button id="calculate-button">Generate PNG</button>
 			<div class="grid-dimensions"></div>
 			<div class="device-info"></div><br>
 			<button id="save-button">Save Image</button><br>
@@ -47,7 +53,14 @@
 	<div class="img-holder" id="img-holder">
 	</div>
 	<script src="html2canvas.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="script.js"></script>
+  <script> 
+  document.addEventListener('DOMContentLoaded', function() {
+    onLoad();
+  });
+  </script>
+	 
 </body>
 </html>
 <!-- Copyright 2023 Markus Tolin -->

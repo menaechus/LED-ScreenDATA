@@ -1,4 +1,4 @@
 Add selection for hanging or stacked (DONE)
 For ROE calculate stacking sets and weights based on ROE guidelines
 Make the grid/row into an image with the information text (DONE)
-Change the JSON file name to the 'manufacturer'.json and add a dropdown to choose different LED manufacturer
+Change the JSON file name to the 'manufacturer'.json and add a dropdown to choose different LED manufacturer (DONE)
