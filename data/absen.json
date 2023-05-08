@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "Polaris PL2.5 Pro",
+        "PhysicalWidth": 500,
+        "PhysicalHeight": 500,
+        "Weight": 9.6,
+        "PixelWidth": 200,
+        "PixelHeight": 200,
+        "TotalPixels": 40000,
+        "PowerDraw": 192
+    }
+]
