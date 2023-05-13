@@ -6,6 +6,10 @@
     {
         "Name" : "Absen",
         "Filename" : "absen.json"
+    },
+    {
+        "Name" : "InfiLed",
+        "Filename" : "infiled.json"
     }
 
 ]

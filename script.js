@@ -2,11 +2,16 @@
 //then it reads the Filename data from the array and populates a object called screens with that data so that it can be referended later with manufacturer name
 //then it reads the Filaname data and populates another dropdown menu with that data
 const manufacturersFile = 'manufacturers.json';
+const resolutionsFile = 'resolutions.json';
 const dataDirectory = 'data/';
 const manufacturerDropdown = document.getElementById('manufacturer-select');
 const deviceDropdown = document.getElementById('device-select');
+var imageWidth = 1920;
+var imageHeight = 1080;
 var Manufacturers = [];
 var allScreens = [];
+var devices = [];
+var resolutions = [];
 var currentManufacturer;
 var currentDevice;
 
@@ -39,10 +44,14 @@ function populateManufacturerDropdown(Manufacturers) {
 		var option = document.createElement('option');
 			option.value = manufacturer.Name;
 			option.text = manufacturer.Name;
-			manufacturerDropdown.add(option);
+		var option2 = $('<div class="item" data-value="' + manufacturer.Name + '">' + manufacturer.Name + '</div>');
+		var manuDrop = $('#manufacturer-select .menu');
+        manuDrop.append(option2);
 	});
+	$('.dropdown').dropdown('refresh');
 	//default dropdown to first manufacturer
-	//currentManufacturer = Manufacturers[1].Name;
+	currentManufacturer = Manufacturers[0].Name;
+	$('#manufacturer-select').dropdown('set selected', currentManufacturer);
 	readLedScreen(Manufacturers);
 }
 
@@ -65,17 +74,21 @@ function populateDeviceDropdown() {
 	//populate the device dropdown with the data from the allScreens array
 	//dropdown should only be populated with the data from the selected manufacturer
 	//clear the dropdown first
-	currentManufacturer = manufacturerDropdown.value;
-	//console.log(manufacturerDropdown.value);
-	deviceDropdown.innerHTML = '';
-	var devices = allScreens[currentManufacturer];
+	currentManufacturer = $('#manufacturer-select').dropdown('get value');
+	//console.log(currentManufacturer);
+	var deviceDrop = $('#device-select .menu');
+	$('#device-select .menu').empty();
+	devices = allScreens[currentManufacturer];
 	//console.log(devices);
 	devices.forEach(device => {
 		var option = document.createElement('option');
 		option.value = device.Name;
 		option.text = device.Name;
-		deviceDropdown.add(option);
+		var option2 = $('<div class="item" data-value="' + device.Name + '">' + device.Name + '</div>');
+		deviceDrop.append(option2);
 	});
+	$('#device-select').dropdown('refresh');
+	$('#device-select').dropdown('set selected', devices[0].Name);
 	updateDeviceInfo();
 }
 
@@ -86,9 +99,10 @@ function updateDeviceInfo() {
 	//calculate the total pixels and total power based on the number of screen pieces
 	//add each piece of device information as a new paragraph
 	//append the device information div to the main device information div
-	const deviceName = deviceDropdown.value;
+	const deviceName = $('#device-select').dropdown('get value');
 	const device = allScreens[currentManufacturer].find(device => device.Name === deviceName);
 	currentDevice = device;
+	
 	const deviceInfoDiv = document.querySelector('.device-info');
 	// Clear any existing device information
 	deviceInfoDiv.innerHTML = '';
@@ -114,10 +128,11 @@ function updateDeviceInfo() {
 	});
 	// Append the device information div to the main device information div
 	deviceInfoDiv.appendChild(deviceDiv);
+	
 }
 
 function drawGrid() {
-	const deviceName = deviceDropdown.value;
+	const deviceName = $('#device-select').dropdown('get value');
 	const device = allScreens[currentManufacturer].find(device => device.Name === deviceName);
 	numCols = document.getElementById('screen-cols').value;
 	numRows = document.getElementById('screen-rows').value;
@@ -155,7 +170,7 @@ function drawGrid() {
 	const totalWidth = device.PhysicalWidth * numCols;
 	const totalHeight = device.PhysicalHeight * numRows;
 	const totalWeight = device.Weight * totalAmount;
-	var totalWeghtF = totalWeight.toFixed(2);
+	var totalWeightF = totalWeight.toFixed(2);
 	var totalHeightF = totalHeight.toFixed(2);
 	var totalWidthF = totalWidth.toFixed(2);
 			
@@ -167,15 +182,55 @@ function drawGrid() {
 	dimensions.innerHTML += "<br>Physical dimensions: " + totalWidthF + "mm * " + totalHeightF + "mm";
 	dimensions.innerHTML += "<br>Total powerdraw: " + totalPower + "w";
 	dimensions.innerHTML += "<br>Number of phases (3000W): " + AmountOfPhasesF;
-	dimensions.innerHTML += "<br>Total weight: " + totalWeghtF + "kg";
+	dimensions.innerHTML += "<br>Total weight: " + totalWeightF + "kg";
 	dimensions.innerHTML += "<br><br>";
 }	
+
+function readResolution() {
+	//read resolutions.json and populate the dropdown with the data
+	$.getJSON(resolutionsFile, function(data) {
+		resolutions = data;
+	}
+	).fail(function() {
+		alert('Error reading resolutions file');
+	}
+	).done(function() {
+		//console.log(resolutions);
+		populateResolutionDropdown(resolutions);
+	}
+	);
+}
+
+function populateResolutionDropdown(resolutions) {
+	//populate the dropdown with the data from the resolutions array
+
+	resolutions.forEach(resolution => {
+		var option = document.createElement('option');
+		option.value = resolution.Name;
+		option.text = resolution.Name;
+		var option2 = $('<div class="item" data-value="' + resolution.Name + '">' + resolution.Name + '</div>');
+		var resoDrop = $('#resolution-select .menu');
+		resoDrop.append(option2);
+	});
+	$('.dropdown').dropdown('refresh');
+	//default dropdown to first resolution
+	currentResolution = resolutions[0].Name;
+	$('#resolution-select').dropdown('set selected', currentResolution);
+}
+
+function setResolution() {
+	//set the resolution based on the dropdown selection
+	const resolutionName = $('#resolution-select').dropdown('get value');
+	const resolution = resolutions.find(resolution => resolution.Name === resolutionName);
+	imageWidth = resolution.Width;
+	imageHeight = resolution.Height;
+	console.log(imageWidth);
+}
 
 function generateImage(device, gridContainer) {
 	emptyImages();
 	const grid = document.querySelector('.grid-img-holder');
-	html2canvas((grid), { width: 1920,
-		height: 1080 }).then(function(canvas) {
+	html2canvas((grid), { width: imageWidth, height: imageHeight }).then(function(canvas) {
 		const img = new Image();
 		img.backgroundColor = "#FFFFFF";
 		img.src = canvas.toDataURL();
@@ -229,4 +284,11 @@ function onLoad() {
 	document.getElementById('save-button').style.display = 'none';
 	document.getElementById('img-holder').style.display = 'none';
 	readManufacturers();
+	$('.dropdown').dropdown();
+	readResolution();
+	//add onchange event to resolution dropdown
+	$('#resolution-select').dropdown({
+		onChange: function(value, text, $selectedItem) {
+			setResolution();
+		}});
 }

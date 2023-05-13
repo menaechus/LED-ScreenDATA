@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "IRDB2.6",
+        "PhysicalWidth": 500,
+        "PhysicalHeight": 500,
+        "Weight": 8.8,
+        "PixelWidth": 192,
+        "PixelHeight": 192,
+        "TotalPixels": 36864,
+        "PowerDraw": 150
+    }
+]

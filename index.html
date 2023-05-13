@@ -3,24 +3,35 @@
 <head>
 	<title>LED Calculator</title>
 	<link rel="stylesheet" href="style.css">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css" integrity="sha512-tdyzfjYDk2OR9L10jvzzuGUB0Rvl5fyMW/Z8yfbYyyENfuXxtcDtEq7d/PdiA0hzQzXjWwvZasjEp8Joli2tkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/transition.min.css" integrity="sha512-HgM+2tpAdAIDm77Pe0gKU78lxA5MPfurAZFf1KDm1l/0npc9YRh+7rqDXmBKajNu3oFtiOKX+fBrK0W/8wRecw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body
-	<div class="info">
-		<div class="info2">
-		Currently includes most of ROE LEDs. <br>
-		Only Absen Polaris PL2.5 is in the list <br>
-		08.05.2023<br>
-		</div>
+<body>
+	<div class="info2">
+		Led Screen Calculator<br>
 	</div>
 	<div class="parent-container">
 		<div class="container">
 
-		<label for="manufacturer-select">Select manufacturer:</label>
-			<select id="manufacturer-select"></select>
+			<div class="ui fluid search selection dropdown" id="manufacturer-select">
+				<input type="hidden" id="manufacturer-select2">
+				<i class="dropdown icon"></i>
+				<div class="default text">Select manufacturer</div>
+				<div class="menu">
+				</div>
+			</div>
 
-			<label for="device-select">Select a device:</label>
-			<select id="device-select"></select>
+			<div class="ui fluid search selection dropdown" id="device-select">
+				<input type="hidden" id="device-select2">
+				<i class="dropdown icon"></i>
+				<div class="default text">Select device</div>
+				<div class="menu">
+				</div>
+			</div>
+
+			<!--<label for="device-select">Select a device:</label>
+			<select id="device-select" class="dropdown"></select>-->
 
 			<!-- add selection between stacked or hanging  not a checkbox -->
 			<form>
@@ -34,9 +45,16 @@
 			<input type="number" id="screen-rows" min="1" max="25" value="1">
 			<label for="screen-cols">Enter the number of columns:</label>
 			<input type="number" id="screen-cols" min="1" max="25" value="1">
-			<button id="calculate-button">Generate PNG</button>
 			<div class="grid-dimensions"></div>
 			<div class="device-info"></div><br>
+			<div class="ui fluid search selection dropdown" id="resolution-select">
+				<input type="hidden" id="resolution-select2">
+				<i class="dropdown icon"></i>
+				<div class="default text">Select Resolution for the generated image</div>
+				<div class="menu">
+				</div>
+			</div>
+			<button id="calculate-button">Generate PNG</button>
 			<button id="save-button">Save Image</button><br>
 			<button id="clear-button">Clear Image</button><br>
 		</div>
@@ -52,8 +70,9 @@
 	</div>
 	<div class="img-holder" id="img-holder">
 	</div>
-	<script src="html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
 	<script src="script.js"></script>
   <script> 
   document.addEventListener('DOMContentLoaded', function() {

@@ -1,0 +1,17 @@
+[
+    {
+        "Name" : "720p",
+        "Width" : 1280,
+        "Height" : 720
+    },
+    {
+        "Name" : "1080p",
+        "Width" : 1920,
+        "Height" : 1080
+    },
+    {
+        "Name" : "4K",
+        "Width" : 3840,
+        "Height" : 2160
+    }
+]
