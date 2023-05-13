@@ -146,9 +146,15 @@ function drawGrid() {
 	gridContainer.innerHTML = "";// clear existing grid
 	for (let i = 0; i < numRows; i++) {
 	const row = document.createElement("div");
+	//set row and column classes width and height based on the device information in pixels
+	//row.style.height = device.PixelHeight + "px";
+	//row.style.width = device.PixelWidth + "px";
+
 	row.classList.add("grid-row");
 	for (let j = 0; j < numCols; j++) {
 		const column = document.createElement("div");
+		//column.style.height = device.PixelHeight + "px";
+		//column.style.width = device.PixelWidth + "px";
 		column.classList.add("grid-column");
 		row.appendChild(column);
 		if ((i + j) % 2 == 0) {
@@ -229,8 +235,10 @@ function setResolution() {
 
 function generateImage(device, gridContainer) {
 	emptyImages();
-	const grid = document.querySelector('.grid-img-holder');
-	html2canvas((grid), { width: imageWidth, height: imageHeight }).then(function(canvas) {
+	if(gridContainer == null) {
+	gridContainer = document.querySelector('.grid-img-holder');
+	}
+	html2canvas((gridContainer), { width: imageWidth, height: imageHeight }).then(function(canvas) {
 		const img = new Image();
 		img.backgroundColor = "#FFFFFF";
 		img.src = canvas.toDataURL();
@@ -246,7 +254,60 @@ function generateImage(device, gridContainer) {
 function callImgGen() {	
 	const gridContainer = document.querySelector('.grid-container');
 	const device = currentDevice;
+	//this needs to call a function that generates the image with just the grid
+	//it needs to redraw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
+	//then it needs to call the generateImage function with the correct device information and the grid container
+	//also needs to check the resolution of the led screen and set the image size to big enough to fit the grid from the list of resolutions
+
+	//drawLedGrid();
+
 	generateImage(device, gridContainer);
+}
+
+function drawLedGrid() {
+	//draw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
+	const deviceName = $('#device-select').dropdown('get value');
+	const device = allScreens[currentManufacturer].find(device => device.Name === deviceName);
+	numCols = document.getElementById('screen-cols').value;
+	numRows = document.getElementById('screen-rows').value;
+	if(numCols==0){
+		numCols=1;
+	}
+	if(numRows==0){
+		numRows=1;
+	}
+	//create a new hidden grid to draw the image from
+	const gridContainer = document.querySelector('.grid-img-holder');
+	gridContainer.innerHTML = "";
+	const hiddenimg = gridContainer.appendChild(document.createElement('div'));
+	hiddenimg.classList.add("grid-img");
+	//hide hiddenimg from the user
+	hiddenimg.style.display = 'none';
+	//draw the grid into hiddenimg
+
+	//make sure the grid is the correct size
+
+	for (let i = 0; i < numRows; i++) {
+		const row = document.createElement("div");
+		row.style.height = device.PixelHeight + "px";
+		row.style.width = device.PixelWidth + "px";
+		row.classList.add("grid-row");
+
+		for (let j = 0; j < numCols; j++) {
+			const column = document.createElement("div");
+			column.style.height = device.PixelHeight + "px";
+			column.style.width = device.PixelWidth + "px";
+			column.classList.add("grid-column");
+			row.appendChild(column);
+			if ((i + j) % 2 == 0) {
+				column.style.backgroundColor = "green";
+			} else {
+				column.style.backgroundColor = "red";
+			}
+		}
+		hiddenimg.appendChild(row);
+	}
+	generateImage(device, hiddenimg);
 }
 
 function clearButton() {
