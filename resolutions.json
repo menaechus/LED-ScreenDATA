@@ -13,5 +13,15 @@
         "Name" : "4K",
         "Width" : 3840,
         "Height" : 2160
+    },
+    {
+        "Name" : "8K",
+        "Width" : 7680,
+        "Height" : 4320
+    },
+    {
+        "Name" : "Custom",
+        "Width" : 1,
+        "Height" : 1
     }
 ]

@@ -261,8 +261,28 @@ function populateResolutionDropdown(resolutions) {
 
 function setResolution() {
 	//set the resolution based on the dropdown selection
+	
 	const resolutionName = $('#resolution-select').dropdown('get value');
-	const resolution = resolutions.find(resolution => resolution.Name === resolutionName);
+	var resolution = resolutions.find(resolution => resolution.Name === resolutionName);
+	
+	//if user selects custom resolution, show the custom resolution input fields called id="custom-res-width" and id="custom-res-height"
+	// to enable them, we need to remove the class "hidden" from them
+	if(resolutionName === 'Custom') {
+		//console.log('custom resolution selected');
+		$('#custom-res-width').removeClass('disabled');
+		$('#custom-res-height').removeClass('disabled');
+	}
+	else {
+		$('#custom-res-width').addClass('disabled');
+		$('#custom-res-height').addClass('disabled');
+	}
+	// if custom resolution get the resolution width and height from the custom resolution input fields and set them to the resolution object
+	if(resolutionName === 'Custom') {
+		resolution.Width = $('#custom-res-width').val();
+		resolution.Height = $('#custom-res-height').val();
+		//console.log(resolution.Width + ' ' + resolution.Height);
+	}
+	
 	imageWidth = resolution.Width;
 	imageHeight = resolution.Height;
 	//console.log(imageWidth);
@@ -287,16 +307,13 @@ function generateImage(device, gridContainer) {
 }
 
 function callImgGen() {	
+	//this should generate one image with just the grid
+	//one image with data lines and  one image with power lines
+	//and one image with total weight and dimensions and if user selected the stacked option, one image with the stacked dimensions and needed ballast etc.
+	//also in that one we should include the total powerdraw and number of phases
 	const gridContainer = document.querySelector('.hidden-container');
 	const device = currentDevice;
-	//this needs to call a function that generates the image with just the grid
-	//it needs to redraw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
-	//then it needs to call the generateImage function with the correct device information and the grid container
-	//check if the led grid size fits in the imagewidth and height
-	//if not, show error message
-	//if it fits, call generateImage
-	//compare the led grid size to the image size
-	//if the led grid is smaller than the image, show error message
+	
 	var ledScreenWidth = device.PixelWidth * numCols;
 	var ledScreenHeight = device.PixelHeight * numRows;
 	if(ledScreenWidth > imageWidth || ledScreenHeight > imageHeight) {
@@ -306,9 +323,6 @@ function callImgGen() {
 		generateImage(device, gridContainer);
 	}
 
-	//drawLedGrid();
-	
-	//generateImage(device, gridContainer);
 }
 
 
@@ -345,6 +359,9 @@ function onLoad() {
 	document.getElementById('screen-rows').addEventListener('input', drawGrid);
 	document.getElementById('odd-color ui').addEventListener('change', drawGrid);
 	document.getElementById('even-color ui').addEventListener('change', drawGrid);
+	document.getElementById('resolution-select').addEventListener('change', setResolution);
+	document.getElementById('custom-res-width').addEventListener('change', setResolution);
+	document.getElementById('custom-res-height').addEventListener('change', setResolution);
 	deviceDropdown.addEventListener('change', updateDeviceInfo);
 	manufacturerDropdown.addEventListener('change', populateDeviceDropdown);	
 	document.getElementById('save-button').style.display = 'none';
