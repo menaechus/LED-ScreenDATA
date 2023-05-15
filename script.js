@@ -143,21 +143,17 @@ function drawGrid() {
 		numRows=1;
 	}
 	const gridContainer = document.querySelector('.grid-container');
-	gridContainer.innerHTML = "";// clear existing grid
+	gridContainer.innerHTML = "";
+	let number = 1; // Running number
 	for (let i = 0; i < numRows; i++) {
 	const row = document.createElement("div");
-	//set row and column classes width and height based on the device information in pixels
-	//row.style.height = device.PixelHeight + "px";
-	//row.style.width = device.PixelWidth + "px";
-
 	row.classList.add("grid-row");
 	for (let j = 0; j < numCols; j++) {
 		const column = document.createElement("div");
-		//column.style.height = device.PixelHeight + "px";
-		//column.style.width = device.PixelWidth + "px";
 		column.classList.add("grid-column");
+		column.textContent = number++; // Add the running number
 		row.appendChild(column);
-		if ((i + j) % 2 == 0) {
+		if ((i + j) % 2 === 0) {
 		column.style.backgroundColor = "green";
 		} else {
 		column.style.backgroundColor = "red";
@@ -165,6 +161,7 @@ function drawGrid() {
 	}
 	gridContainer.appendChild(row);
 	}
+
 			
 	const dimensions = document.querySelector(".grid-info");
 	const totalPower = device.PowerDraw * (numCols * numRows);
