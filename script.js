@@ -292,11 +292,23 @@ function callImgGen() {
 	//this needs to call a function that generates the image with just the grid
 	//it needs to redraw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
 	//then it needs to call the generateImage function with the correct device information and the grid container
-	//also needs to check the resolution of the led screen and set the image size to big enough to fit the grid from the list of resolutions
+	//check if the led grid size fits in the imagewidth and height
+	//if not, show error message
+	//if it fits, call generateImage
+	//compare the led grid size to the image size
+	//if the led grid is smaller than the image, show error message
+	var ledScreenWidth = device.PixelWidth * numCols;
+	var ledScreenHeight = device.PixelHeight * numRows;
+	if(ledScreenWidth > imageWidth || ledScreenHeight > imageHeight) {
+		alert("The LED grid is too big for the image. Please select a bigger image or a smaller LED grid.");
+	} else {
+		document.getElementById('hidden-container').style.display = 'flex';
+		generateImage(device, gridContainer);
+	}
 
 	//drawLedGrid();
-	document.getElementById('hidden-container').style.display = 'flex';
-	generateImage(device, gridContainer);
+	
+	//generateImage(device, gridContainer);
 }
 
 
