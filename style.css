@@ -6,6 +6,9 @@ body {
 	padding: 0;
 	background-color: #ffffff;
 }
+.hidden-container {
+	display: flex;
+}
 
 .parent-container {
   display: flex;

@@ -136,50 +136,70 @@ function drawGrid() {
 	const device = allScreens[currentManufacturer].find(device => device.Name === deviceName);
 	numCols = document.getElementById('screen-cols').value;
 	numRows = document.getElementById('screen-rows').value;
-	if(numCols==0){
-		numCols=1;
+	if (numCols == 0) {
+	  numCols = 1;
 	}
-	if(numRows==0){
-		numRows=1;
+	if (numRows == 0) {
+	  numRows = 1;
 	}
+	
 	// Calculate the size of each grid piece
 	const gridPieceWidth = device.PixelWidth;
 	const gridPieceHeight = device.PixelHeight;
-
+  
 	const gridContainer = document.querySelector('.grid-container');
 	const hiddenContainer = document.querySelector('.hidden-container');
 	hiddenContainer.innerHTML = "";
 	gridContainer.innerHTML = "";
-
+  
 	let number = 1; // Running number
-
+  
+	// Get colors from odd-color and even-color inputs
+	const oddColor = document.getElementById('odd-color ui').value;
+	const evenColor = document.getElementById('even-color ui').value;
+  
+	// Create the grid columns and hidden columns and add them to the hidden container, also make the size of the grid piece to be the same as the device pixel size
 	for (let i = 0; i < numRows; i++) {
-			const row = document.createElement("div");
-			row.classList.add("grid-row");
-			
-			const hiddenRow = document.createElement("div");
-			hiddenRow.classList.add("hidden-row");
+		const row = document.createElement("div");
 		
-				for (let j = 0; j < numCols; j++) {
-					const column = document.createElement("div");
-					column.classList.add("grid-column");
-					column.textContent = number++; // Add the running number
-					row.appendChild(column);
-					
-					const hiddenColumn = document.createElement("div");
-					hiddenColumn.classList.add("hidden-column");
-					hiddenColumn.style.width = gridPieceWidth + "px"; // Set the width of the grid piece
-					hiddenColumn.style.height = gridPieceHeight + "px"; // Set the height of the grid piece
-					hiddenRow.appendChild(hiddenColumn);
-				}
-		
-			gridContainer.appendChild(row);
-			hiddenContainer.appendChild(hiddenRow);
-	}
-	
-	
 
-			
+		row.classList.add("grid-row");
+		row.style.backgroundColor = i % 2 === 0 ? oddColor : evenColor; // Apply oddColor or evenColor to the row
+
+
+		
+		
+		for (let j = 0; j < numCols; j++) {
+		  const column = document.createElement("div");
+		  column.classList.add("grid-column");
+		  column.textContent = number++; // Add the running number
+		  column.style.backgroundColor = j % 2 === 0 ? evenColor : oddColor; // Apply evenColor or oddColor to the column
+
+		  row.appendChild(column);
+		  
+		  
+		}
+		gridContainer.appendChild(row);
+		
+		  
+	  }
+
+	  const originalGrid = document.querySelector('.grid-container');
+	  const clonedGrid = originalGrid.cloneNode(true); // Clone the original grid, including its children
+	  
+	  const clonedColumns = clonedGrid.querySelectorAll('.grid-column');
+	  clonedColumns.forEach(column => {
+		column.style.width = gridPieceWidth + 'px';
+		column.style.height = gridPieceHeight + 'px';
+		column.style.lineHeight = gridPieceHeight + 'px'; // Center the text vertically
+		column.style.fontSize = Math.floor(gridPieceWidth * 0.6) + 'px'; // Adjust the font size based on the column width
+	  });
+	  hiddenContainer.style.width = imageWidth + 'px'; // Set the width of the hidden container to match the grid
+	  hiddenContainer.style.height = imageHeight + 'px'; // Set the height of the hidden container to match the grid
+	  // Add the cloned grid to the desired container element
+	  hiddenContainer.innerHTML = ''; // Clear the container first
+	  hiddenContainer.appendChild(clonedGrid);
+	  
 	const dimensions = document.querySelector(".grid-info");
 	const totalPower = device.PowerDraw * (numCols * numRows);
 	const AmountOfPhases = totalPower / 3000;
@@ -193,7 +213,7 @@ function drawGrid() {
 	var totalWeightF = totalWeight.toFixed(2);
 	var totalHeightF = totalHeight.toFixed(2);
 	var totalWidthF = totalWidth.toFixed(2);
-			
+
 	dimensions.innerHTML = '';
 	dimensions.innerHTML = "Model: " + device.Name;
 	dimensions.innerHTML += "<br>Total amount: " + totalAmount; 
@@ -217,6 +237,7 @@ function readResolution() {
 	).done(function() {
 		//console.log(resolutions);
 		populateResolutionDropdown(resolutions);
+		setResolution();
 	}
 	);
 }
@@ -252,7 +273,7 @@ function generateImage(device, gridContainer) {
 	if(gridContainer == null) {
 	gridContainer = document.querySelector('.grid-img-holder');
 	}
-	html2canvas((gridContainer), { width: imageWidth, height: imageHeight }).then(function(canvas) {
+	html2canvas((gridContainer), { width: imageWidth, height: imageHeight , scale: 1}).then(function(canvas) {
 		const img = new Image();
 		img.backgroundColor = "#FFFFFF";
 		img.src = canvas.toDataURL();
@@ -262,11 +283,11 @@ function generateImage(device, gridContainer) {
 	//if we have created an image, show save button
 	document.getElementById('img-holder').style.display = 'block';
 	document.getElementById('save-button').style.display = 'block';
-
+	document.getElementById('hidden-container').style.display = 'none';
 }
 
 function callImgGen() {	
-	const gridContainer = document.querySelector('.grid-container');
+	const gridContainer = document.querySelector('.hidden-container');
 	const device = currentDevice;
 	//this needs to call a function that generates the image with just the grid
 	//it needs to redraw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
@@ -274,55 +295,11 @@ function callImgGen() {
 	//also needs to check the resolution of the led screen and set the image size to big enough to fit the grid from the list of resolutions
 
 	//drawLedGrid();
-
+	document.getElementById('hidden-container').style.display = 'flex';
 	generateImage(device, gridContainer);
 }
 
-function drawLedGrid() {
-	//draw the grid with the correct number of rows and columns and the elements need to be the correct size in pixels
-	const deviceName = $('#device-select').dropdown('get value');
-	const device = allScreens[currentManufacturer].find(device => device.Name === deviceName);
-	numCols = document.getElementById('screen-cols').value;
-	numRows = document.getElementById('screen-rows').value;
-	if(numCols==0){
-		numCols=1;
-	}
-	if(numRows==0){
-		numRows=1;
-	}
-	//create a new hidden grid to draw the image from
-	const gridContainer = document.querySelector('.grid-img-holder');
-	gridContainer.innerHTML = "";
-	const hiddenimg = gridContainer.appendChild(document.createElement('div'));
-	hiddenimg.classList.add("grid-img");
-	//hide hiddenimg from the user
-	hiddenimg.style.display = 'none';
-	//draw the grid into hiddenimg
 
-	//make sure the grid is the correct size
-
-	for (let i = 0; i < numRows; i++) {
-		const row = document.createElement("div");
-		row.style.height = device.PixelHeight + "px";
-		row.style.width = device.PixelWidth + "px";
-		row.classList.add("grid-row");
-
-		for (let j = 0; j < numCols; j++) {
-			const column = document.createElement("div");
-			column.style.height = device.PixelHeight + "px";
-			column.style.width = device.PixelWidth + "px";
-			column.classList.add("grid-column");
-			row.appendChild(column);
-			if ((i + j) % 2 == 0) {
-				column.style.backgroundColor = "green";
-			} else {
-				column.style.backgroundColor = "red";
-			}
-		}
-		hiddenimg.appendChild(row);
-	}
-	generateImage(device, hiddenimg);
-}
 
 function clearButton() {
 	document.getElementById('img-holder').style.display = 'none';
@@ -354,6 +331,8 @@ function onLoad() {
 	document.getElementById('manufacturer-select').addEventListener('change', populateDeviceDropdown);
 	document.getElementById('screen-cols').addEventListener('input', drawGrid);
 	document.getElementById('screen-rows').addEventListener('input', drawGrid);
+	document.getElementById('odd-color ui').addEventListener('change', drawGrid);
+	document.getElementById('even-color ui').addEventListener('change', drawGrid);
 	deviceDropdown.addEventListener('change', updateDeviceInfo);
 	manufacturerDropdown.addEventListener('change', populateDeviceDropdown);	
 	document.getElementById('save-button').style.display = 'none';
