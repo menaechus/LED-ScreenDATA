@@ -6,6 +6,8 @@ const resolutionsFile = 'resolutions.json';
 const dataDirectory = 'data/';
 const manufacturerDropdown = document.getElementById('manufacturer-select');
 const deviceDropdown = document.getElementById('device-select');
+var maximumPixelCount = 500000;
+var tolerancePercentage = 20;
 var imageWidth = 1920;
 var imageHeight = 1080;
 var Manufacturers = [];
@@ -128,7 +130,7 @@ function updateDeviceInfo() {
 	});
 	// Append the device information div to the main device information div
 	deviceInfoDiv.appendChild(deviceDiv);
-	
+	saveCookie();
 }
 
 function drawGrid() {
@@ -210,6 +212,7 @@ function drawGrid() {
 	const totalWidth = device.PhysicalWidth * numCols;
 	const totalHeight = device.PhysicalHeight * numRows;
 	const totalWeight = device.Weight * totalAmount;
+	const dataFeeds = calculateDataLines(TotalPixels)
 	var totalWeightF = totalWeight.toFixed(2);
 	var totalHeightF = totalHeight.toFixed(2);
 	var totalWidthF = totalWidth.toFixed(2);
@@ -222,8 +225,10 @@ function drawGrid() {
 	dimensions.innerHTML += "<br>Physical dimensions: " + totalWidthF + "mm * " + totalHeightF + "mm";
 	dimensions.innerHTML += "<br>Total powerdraw: " + totalPower + "w";
 	dimensions.innerHTML += "<br>Number of phases (3000W): " + AmountOfPhasesF;
+	dimensions.innerHTML += "<br>Number of data feeds: " + dataFeeds;
 	dimensions.innerHTML += "<br>Total weight: " + totalWeightF + "kg";
 	dimensions.innerHTML += "<br><br>";
+	saveCookie();
 }	
 
 function readResolution() {
@@ -350,6 +355,65 @@ function emptyImages() {
 	}
 }
 
+function calculateDataLines(pixelCount) {
+	
+	// Calculate the allowed pixel count range based on the tolerance
+	const lowerBound = maximumPixelCount - (maximumPixelCount * tolerancePercentage / 100);
+	const upperBound = maximumPixelCount + (maximumPixelCount * tolerancePercentage / 100);
+	
+	//if pixel count is less than the lower bound, return 1
+	if(pixelCount < lowerBound) {
+		return 1;
+	}  
+	
+
+	
+	// Calculate the number of data lines
+	const dataLines = Math.ceil(pixelCount / maximumPixelCount);
+	return dataLines;
+  }
+
+  //we should save the color selection to a cookie or something so that it is remembered when the user returns to the page
+  //also the last used device and manufacturer should be remembered
+
+function saveCookie() {
+	//save the color selection to a cookie
+	var oddColor = document.getElementById('odd-color ui').value;
+	var evenColor = document.getElementById('even-color ui').value;
+	var cookieValue = oddColor + ',' + evenColor;
+	document.cookie = "color=" + cookieValue;
+	
+	//save the last used device and manufacturer to a cookie
+	var device = document.getElementById('device-select').value;
+	var manufacturer = document.getElementById('manufacturer-select').value;
+	var cookieValue = device + ',' + manufacturer;
+	document.cookie = "device=" + cookieValue;
+}
+
+function loadCookie() {
+	//check if the cookie exists
+	if(document.cookie.indexOf('color') == -1) {
+		//if it doesn't exist, return
+		return;	
+	}
+
+	//load the color selection from a cookie
+	var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)color\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	var colors = cookieValue.split(',');
+	document.getElementById('odd-color ui').value = colors[0];
+	document.getElementById('even-color ui').value = colors[1];
+
+	//load the last used device and manufacturer from a cookie
+	var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)device\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	var device = cookieValue.split(',')[0];
+	var manufacturer = cookieValue.split(',')[1];
+	document.getElementById('device-select').value = device;
+	document.getElementById('manufacturer-select').value = manufacturer;
+}
+
+//we should call saveCookie() when the user changes the color selection or the device selection
+
+
 function onLoad() {
 	document.getElementById('calculate-button').addEventListener('click', callImgGen);
 	document.getElementById('save-button').addEventListener('click', saveImage);
@@ -370,6 +434,8 @@ function onLoad() {
 	readManufacturers();
 	$('.dropdown').dropdown();
 	readResolution();
+	loadCookie();
+	
 	//add onchange event to resolution dropdown
 	$('#resolution-select').dropdown({
 		onChange: function(value, text, $selectedItem) {
