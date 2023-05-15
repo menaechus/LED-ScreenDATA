@@ -142,25 +142,42 @@ function drawGrid() {
 	if(numRows==0){
 		numRows=1;
 	}
+	// Calculate the size of each grid piece
+	const gridPieceWidth = device.PixelWidth;
+	const gridPieceHeight = device.PixelHeight;
+
 	const gridContainer = document.querySelector('.grid-container');
+	const hiddenContainer = document.querySelector('.hidden-container');
+	hiddenContainer.innerHTML = "";
 	gridContainer.innerHTML = "";
+
 	let number = 1; // Running number
+
 	for (let i = 0; i < numRows; i++) {
-	const row = document.createElement("div");
-	row.classList.add("grid-row");
-	for (let j = 0; j < numCols; j++) {
-		const column = document.createElement("div");
-		column.classList.add("grid-column");
-		column.textContent = number++; // Add the running number
-		row.appendChild(column);
-		if ((i + j) % 2 === 0) {
-		column.style.backgroundColor = "green";
-		} else {
-		column.style.backgroundColor = "red";
-		}
+			const row = document.createElement("div");
+			row.classList.add("grid-row");
+			
+			const hiddenRow = document.createElement("div");
+			hiddenRow.classList.add("hidden-row");
+		
+				for (let j = 0; j < numCols; j++) {
+					const column = document.createElement("div");
+					column.classList.add("grid-column");
+					column.textContent = number++; // Add the running number
+					row.appendChild(column);
+					
+					const hiddenColumn = document.createElement("div");
+					hiddenColumn.classList.add("hidden-column");
+					hiddenColumn.style.width = gridPieceWidth + "px"; // Set the width of the grid piece
+					hiddenColumn.style.height = gridPieceHeight + "px"; // Set the height of the grid piece
+					hiddenRow.appendChild(hiddenColumn);
+				}
+		
+			gridContainer.appendChild(row);
+			hiddenContainer.appendChild(hiddenRow);
 	}
-	gridContainer.appendChild(row);
-	}
+	
+	
 
 			
 	const dimensions = document.querySelector(".grid-info");
@@ -227,7 +244,7 @@ function setResolution() {
 	const resolution = resolutions.find(resolution => resolution.Name === resolutionName);
 	imageWidth = resolution.Width;
 	imageHeight = resolution.Height;
-	console.log(imageWidth);
+	//console.log(imageWidth);
 }
 
 function generateImage(device, gridContainer) {
@@ -341,6 +358,7 @@ function onLoad() {
 	manufacturerDropdown.addEventListener('change', populateDeviceDropdown);	
 	document.getElementById('save-button').style.display = 'none';
 	document.getElementById('img-holder').style.display = 'none';
+	document.getElementById('hidden-container').style.display = 'none';
 	readManufacturers();
 	$('.dropdown').dropdown();
 	readResolution();

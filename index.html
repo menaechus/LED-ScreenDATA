@@ -6,12 +6,15 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css" integrity="sha512-tdyzfjYDk2OR9L10jvzzuGUB0Rvl5fyMW/Z8yfbYyyENfuXxtcDtEq7d/PdiA0hzQzXjWwvZasjEp8Joli2tkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/transition.min.css" integrity="sha512-HgM+2tpAdAIDm77Pe0gKU78lxA5MPfurAZFf1KDm1l/0npc9YRh+7rqDXmBKajNu3oFtiOKX+fBrK0W/8wRecw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/input.min.css" integrity="sha512-/2SPb+/ufZ1JxqZtjgwhYh6Eg0/rh9IDNjjfPyhJQEeXGRsi8bu7dpI8i2hoGaK4m8iRMvn2L7vBrAy5MdW76A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/button.min.css" integrity="sha512-+1Zl+cDrkWiaN4aCOs9XZ12Jm4Lg3OztufLITILSxr3mo5QM3+WgLH6+s+ytIWoWWQcdNlMGn1JHf75TzHvPHA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	<div class="info2">
 		Led Screen Calculator<br>
 	</div>
-	<div class="parent-container">
+	<!--<div class="ui two column very relaxed stackable grid"> parent-container  -->
+	<div class="ui parent-container">
 		<div class="container">
 
 			<div class="ui fluid search selection dropdown" id="manufacturer-select">
@@ -43,12 +46,22 @@
 			
 			
 			<label for="screen-cols">Enter the number of columns:</label>
-			<input type="number" id="screen-cols" min="1" max="25" value="1">
+			<input class ="ui fluid input" type="number" id="screen-cols" min="1" max="25" value="1">
 			<label for="screen-rows">Enter the number of rows:</label>
-			<input type="number" id="screen-rows" min="1" max="25" value="1">
+			<input class ="ui fluid input" type="number" id="screen-rows" min="1" max="25" value="1">
+			<div class="ui fluid input">
+				<div class="ui fluid color">
+					<label>Odd Color</label>
+					<input type="color" id="odd-color ui" value="#ff0000">
+				</div>
+				<div class="ui fluid color">
+					<label>Even Color</label>
+					<input type="color" id="even-color" value="#00ff00">
+				</div>
+				
+			</div>
 			
-			<div class="grid-dimensions"></div>
-			<div class="device-info"></div><br>
+			<div class="ui message device-info"></div><br>
 			<div class="ui fluid search selection dropdown" id="resolution-select">
 				<input type="hidden" id="resolution-select2">
 				<i class="dropdown icon"></i>
@@ -56,13 +69,13 @@
 				<div class="menu">
 				</div>
 			</div>
-			<button id="calculate-button">Generate PNG</button>
-			<button id="save-button">Save Image</button><br>
-			<button id="clear-button">Clear Image</button><br>
+			<button class ="ui fluid button" id="calculate-button">Generate PNG</button>
+			<button class ="ui fluid button" id="save-button">Save Image</button><br>
+			<button class ="ui fluid button" id="clear-button">Clear Image</button><br>
 		</div>
 		<div class="grid">
 			<div class="grid-img-holder">
-				<div class="grid-info"> 
+				<div class="ui message grid-info"> 
 				</div>
 				<div class="grid-container">
 				</div>
@@ -71,6 +84,9 @@
 		</div>
 	</div>
 	<div class="img-holder" id="img-holder">
+	</div>
+	<div class="hidden-container" id="hidden-container">
+
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
