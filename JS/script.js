@@ -181,7 +181,7 @@ function drawGrid() {
 
 	  const originalGrid = document.querySelector('.grid-container');
 	  const clonedGrid = originalGrid.cloneNode(true); // Clone the original grid, including its children
-	  
+	  clonedGrid.style.margin = '0'; // Remove the margin from the cloned grid
 	  const clonedColumns = clonedGrid.querySelectorAll('.grid-column');
 	  clonedColumns.forEach(column => {
 		column.style.width = gridPieceWidth + 'px';
