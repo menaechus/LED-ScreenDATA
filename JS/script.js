@@ -1,9 +1,10 @@
 //a script that reads manufacturers.json and save that information to array called Manufacturers
 //then it reads the Filename data from the array and populates a object called screens with that data so that it can be referended later with manufacturer name
 //then it reads the Filaname data and populates another dropdown menu with that data
-const manufacturersFile = 'manufacturers.json';
-const resolutionsFile = 'resolutions.json';
+
 const dataDirectory = 'data/';
+const manufacturersFile = dataDirectory + 'manufacturers.json';
+const resolutionsFile = dataDirectory + 'resolutions.json';
 const manufacturerDropdown = document.getElementById('manufacturer-select');
 const deviceDropdown = document.getElementById('device-select');
 var maximumPixelCount = 500000;
@@ -299,7 +300,8 @@ function generateImage(device, gridContainer) {
 	});
 	//if we have created an image, show save button
 	document.getElementById('img-holder').style.display = 'block';
-	document.getElementById('save-button').style.display = 'block';
+	//document.getElementById('save-button').style.display = 'block';
+	$('#save-button').removeClass('disabled');
 	document.getElementById('hidden-container').style.display = 'none';
 }
 
@@ -326,6 +328,7 @@ function callImgGen() {
 
 function clearButton() {
 	document.getElementById('img-holder').style.display = 'none';
+	$('#save-button').addClass('disabled');
 	emptyImages();
 }
 
@@ -338,6 +341,7 @@ function saveImage() {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
+	
 }
 
 function emptyImages() {
@@ -425,7 +429,7 @@ function onLoad() {
 	document.getElementById('custom-res-height').addEventListener('change', setResolution);
 	deviceDropdown.addEventListener('change', updateDeviceInfo);
 	manufacturerDropdown.addEventListener('change', populateDeviceDropdown);	
-	document.getElementById('save-button').style.display = 'none';
+	//document.getElementById('save-button').style.display = 'none';
 	document.getElementById('img-holder').style.display = 'none';
 	document.getElementById('hidden-container').style.display = 'none';
 	readManufacturers();
