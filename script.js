@@ -91,6 +91,7 @@ function populateDeviceDropdown() {
 	});
 	$('#device-select').dropdown('refresh');
 	$('#device-select').dropdown('set selected', devices[0].Name);
+	loadCookie();
 	updateDeviceInfo();
 }
 
@@ -163,14 +164,9 @@ function drawGrid() {
 	// Create the grid columns and hidden columns and add them to the hidden container, also make the size of the grid piece to be the same as the device pixel size
 	for (let i = 0; i < numRows; i++) {
 		const row = document.createElement("div");
-		
-
 		row.classList.add("grid-row");
 		row.style.backgroundColor = i % 2 === 0 ? oddColor : evenColor; // Apply oddColor or evenColor to the row
 
-
-		
-		
 		for (let j = 0; j < numCols; j++) {
 		  const column = document.createElement("div");
 		  column.classList.add("grid-column");
@@ -178,13 +174,9 @@ function drawGrid() {
 		  column.style.backgroundColor = j % 2 === 0 ? evenColor : oddColor; // Apply evenColor or oddColor to the column
 
 		  row.appendChild(column);
-		  
-		  
 		}
 		gridContainer.appendChild(row);
-		
-		  
-	  }
+	}
 
 	  const originalGrid = document.querySelector('.grid-container');
 	  const clonedGrid = originalGrid.cloneNode(true); // Clone the original grid, including its children
@@ -228,7 +220,7 @@ function drawGrid() {
 	dimensions.innerHTML += "<br>Number of data feeds: " + dataFeeds;
 	dimensions.innerHTML += "<br>Total weight: " + totalWeightF + "kg";
 	dimensions.innerHTML += "<br><br>";
-	saveCookie();
+	
 }	
 
 function readResolution() {
@@ -384,13 +376,17 @@ function saveCookie() {
 	document.cookie = "color=" + cookieValue;
 	
 	//save the last used device and manufacturer to a cookie
-	var device = document.getElementById('device-select').value;
-	var manufacturer = document.getElementById('manufacturer-select').value;
+	var device = $('#device-select').dropdown('get value');
+	var manufacturer = $('#manufacturer-select').dropdown('get value');
+	
+	
 	var cookieValue = device + ',' + manufacturer;
 	document.cookie = "device=" + cookieValue;
+	
 }
 
 function loadCookie() {
+
 	//check if the cookie exists
 	if(document.cookie.indexOf('color') == -1) {
 		//if it doesn't exist, return
@@ -407,8 +403,9 @@ function loadCookie() {
 	var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)device\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	var device = cookieValue.split(',')[0];
 	var manufacturer = cookieValue.split(',')[1];
-	document.getElementById('device-select').value = device;
-	document.getElementById('manufacturer-select').value = manufacturer;
+	$('#device-select').dropdown('set selected', device);
+	$('#manufacturer-select').dropdown('set selected', manufacturer);
+	
 }
 
 //we should call saveCookie() when the user changes the color selection or the device selection
@@ -434,7 +431,7 @@ function onLoad() {
 	readManufacturers();
 	$('.dropdown').dropdown();
 	readResolution();
-	loadCookie();
+	//loadCookie();
 	
 	//add onchange event to resolution dropdown
 	$('#resolution-select').dropdown({

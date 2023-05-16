@@ -28,6 +28,10 @@ body {
 	
 }
 
+.ui.form {
+	display: flex;
+}
+
 .info2 {
 	display: flex;
 	flex-direction: row;

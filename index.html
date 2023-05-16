@@ -2,12 +2,13 @@
 <html>
 <head>
 	<title>LED Calculator</title>
-	<link rel="stylesheet" href="style.css">
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css" integrity="sha512-tdyzfjYDk2OR9L10jvzzuGUB0Rvl5fyMW/Z8yfbYyyENfuXxtcDtEq7d/PdiA0hzQzXjWwvZasjEp8Joli2tkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/transition.min.css" integrity="sha512-HgM+2tpAdAIDm77Pe0gKU78lxA5MPfurAZFf1KDm1l/0npc9YRh+7rqDXmBKajNu3oFtiOKX+fBrK0W/8wRecw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/input.min.css" integrity="sha512-/2SPb+/ufZ1JxqZtjgwhYh6Eg0/rh9IDNjjfPyhJQEeXGRsi8bu7dpI8i2hoGaK4m8iRMvn2L7vBrAy5MdW76A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/button.min.css" integrity="sha512-+1Zl+cDrkWiaN4aCOs9XZ12Jm4Lg3OztufLITILSxr3mo5QM3+WgLH6+s+ytIWoWWQcdNlMGn1JHf75TzHvPHA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div class="info2">
@@ -36,13 +37,13 @@
 			<!--<label for="device-select">Select a device:</label>
 			<select id="device-select" class="dropdown"></select>-->
 
-			<!-- add selection between stacked or hanging  not a checkbox -->
+			<!-- add selection between stacked or hanging  not a checkbox 
 			<form>
 				<input class="ui radio" type="radio" id="hanging" name="hanging" value="hanging" checked="checked">
 				<label for="hanging">Hanging (not working yet!)</label><br>
 				<input class="ui radio" type="radio" id="stacked" name="hanging" value="stacked">
 				<label for="stacked">Stacked (not working yet!)</label><br>
-			</form>
+			</form>-->
 			
 			
 			<label for="screen-cols">Enter the number of columns:</label>
@@ -69,21 +70,23 @@
 				<div class="menu">
 				</div>
 			</div>
-			<form class="ui form">
-				
-			<div class="ui fluid">
-				<label for="custom-res-width">Custom Width</label>
-				<input class="ui fluid input" type="number" id="custom-res-width" min="1" max="10000" value="1024">
-			</div>
-			<div class="ui fluid">
-				<label for="custom-res-height">Custom Height</label>
-				<input class="ui fluid input" type="number" id="custom-res-height" min="1" max="10000" value="1024">
-			</div>
+
+			<form class="ui form fluid">
+					<div class="ui fluid">
+					<label for="custom-res-width">Custom Width</label>
+					<input class="ui fluid input" type="number" id="custom-res-width" min="1" max="10000" value="1024">
+				</div>
+				<div class="ui fluid">
+					<label for="custom-res-height">Custom Height</label>
+					<input class="ui fluid input" type="number" id="custom-res-height" min="1" max="10000" value="1024">
+				</div>
 			</form>
+
 			<button class ="ui fluid button" id="calculate-button">Generate PNG</button>
 			<button class ="ui fluid button" id="save-button">Save Image</button><br>
 			<button class ="ui fluid button" id="clear-button">Clear Image</button><br>
 		</div>
+
 		<div class="grid">
 			<div class="grid-img-holder">
 				<div class="ui message grid-info"> 
@@ -93,12 +96,15 @@
 				
 			</div>
 		</div>	
+		
 	</div>
+
 	<div class="img-holder" id="img-holder">
 	</div>
-	<div class="ui hidden-container" id="hidden-container">
 
+	<div class="ui hidden-container" id="hidden-container">
 	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
